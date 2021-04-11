@@ -1,7 +1,7 @@
 # OpenPubSubNetwork
 This is an attempt at making the IPFS PubSub framework fully accessible in websites and IPFS nodes. Or for that matter, even in Libp2p nodes as that's where PubSub is actually implemented.
 
-## How does this library work?
+# How does this library work?
 There are two ways how a user can connect to the IPFS PubSub network. One is obviously with access to a local IPFS node. This is the preferred way butisn't very straightforward. IPFS needs to be started with pubsub enabled and needs to have CORS allowed on * to make it work. That's not trivial though we will likelt get there one day.
 
 Another way is via a proxy. The user connects to a site that exposes a websocket. That websocket is the intermediary between the user and an IPFS node. This is what OpenPubSubNetwork provides. A list of worldwide endpoints to connect to and get access to IPFS PubSub. Along with that an easy to use library to get you started.
@@ -18,7 +18,7 @@ If you run a local site and need some pubsub messages between local things. Don'
 When you need to communicate between n parties where they are not locally accessible. So for example, implementing a chat site on this is very much an intended purpose. Implementing website <> desktop communication is very much intended too.
 
 # Browserify and other js builders
-I intentially did **not** go that route. The code is now fairly minimal and works on both a browser and node.js. In my opinion (and experience) those builders add way to much cruft that explode the js filesize. I'm open to acceptiong patches for this if it's really needed.
+I intentially did **not** go that route. The code is now fairly minimal and works on both a browser and node.js. In my opinion (and experience) those builders add way to much cruft that explode the js filesize. I'm open to accepting patches for this if it's really needed.
 
 # Node.js example
 Install the following node.js packages:
@@ -103,6 +103,7 @@ You will have to do some renaming in the downloads. For example, the openpubsubn
 # Security/encryption
 None. There just is none.
 If you publish something on a channel, anyone listening on that channel can see what you published.
+It's meant as a library to make IPFS PubSub possible in the browser, a pass-through hatch of sorts.
 
 If you want to have it secure, you need to add your own layer of encryption on top of it.
 
