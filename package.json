@@ -1,0 +1,27 @@
+{
+  "name": "openpubsubnetwork",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postversion": "git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markg85/openpubsubnetwork.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/markg85/openpubsubnetwork/issues"
+  },
+  "homepage": "https://github.com/markg85/openpubsubnetwork#readme",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "ipfs-http-client": "^49.0.4",
+    "socket.io-client": "^4.0.1"
+  }
+}
