@@ -26,7 +26,7 @@ Install the following node.js packages:
 
 And run the following code.
 
-```javascript=
+```js
 import { io } from "socket.io-client";
 import ipfsClient from "ipfs-http-client"
 import { OpenPubSubNetwork } from "openpubsubnetwork"
@@ -71,7 +71,7 @@ Get the latest version of:
 
 You will have to do some renaming in the downloads. For example, the openpubsubnetwork file is index.js which i renamed to openpubsubnetwork.js in this example. Same for ipfs-http-client.
 
-```javascript=
+```js
   <script src="socket.io.min.js"></script>
   <script src="ipfs-http-client.min.js"></script>
   <script type="module">
@@ -110,7 +110,7 @@ If you want to have it secure, you need to add your own layer of encryption on t
 
 ## OpenPubSubNetwork conctrustor
 The constructor take an object with a couple of settings:
-```javascript=
+```js
 // Provide an IPFS api endpoint. It must be one where port 5001 is open and pubsub is enabled.
 // Note that you will get a fetch error if yhis url is invalid. That's OK! If that error pops up, it will try websockets next.
 ipfsUrl: "http://127.0.0.1:5001",
