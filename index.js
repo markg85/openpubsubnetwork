@@ -1,5 +1,13 @@
 'use strict';
 
+class OpenPubSubEvent extends Event
+{
+    constructor(name, receivedVia = "unknown") {
+        super(name)
+        this.receivedVia = receivedVia
+    }
+}
+
 class IPFSConnection
 {
     constructor(url, ipfsClient = null) {
@@ -121,7 +129,7 @@ class OpenPubSubNetwork extends EventTarget
         let ipfsStatus = await this.ipfs._testConnection()
         if (ipfsStatus.status == true) {
             this.useIpfs = true
-            this.dispatchEvent(new Event('connected'));
+            this.dispatchEvent(new OpenPubSubEvent('connected', "IPFS"));
             return;
         } else if (ipfsStatus.partial == true) {
 
@@ -145,7 +153,7 @@ class OpenPubSubNetwork extends EventTarget
         }));
 
         if (this.socket?.isWinning) {
-            this.dispatchEvent(new Event('connected'));
+            this.dispatchEvent(new OpenPubSubEvent('connected', "OpenPubSubNetwork"));
         }
     }
     
