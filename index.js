@@ -56,7 +56,7 @@ class IPFSConnection
         this.ipfs.pubsub.publish(channel, JSON.stringify(data));
         
         if (data?.selfEmit) {
-            this.callbacks[channel](JSON.stringify(data.data))
+            this.callbackHandler(channel, JSON.stringify(data.data))
         }
     }
 
@@ -72,8 +72,13 @@ class IPFSConnection
             if (decodedData?.id == this.id) {
                 return;
             }
-            this.callbacks[channel](JSON.stringify(decodedData.data))
+            this.callbackHandler(channel, JSON.stringify(decodedData.data))
         });
+    }
+
+    callbackHandler(channel, data) {
+        console.log(`OpenPubSubNetwork received this message via your local IPFS node`)
+        this.callbacks[channel](data)
     }
 }
 
@@ -84,7 +89,7 @@ class OpenPubSubNetwork extends EventTarget
         this.urls = [
             // Note: these are TEMP servers! More server worldwide will later be added via <country>.openpubsub.network.
             // These *.sc2.nl servers will disappear in the near future!
-            "opn_nl2.sc2.nl",
+            // "opn_nl2.sc2.nl",
             "ipfs-websocket-api.sc2.nl"
         ]
 
@@ -177,7 +182,16 @@ class OpenPubSubNetwork extends EventTarget
             this.socket.emit('subscribe', channel)
             this.socket.on(channel, (data) => {
                 let atob = this.atob
-                callback(atob(data))
+                let decodedData = atob(data)
+                let receivedVia = decodedData.charAt(0).toUpperCase()
+
+                if (receivedVia == 'P') {
+                    console.log(`OpenPubSubNetwork received this message via IPFS`)
+                } else if (receivedVia == 'N') {
+                    console.log(`OpenPubSubNetwork received this message via NKN`)
+                }
+
+                callback(decodedData.substring(1))
             });
         }
     }
